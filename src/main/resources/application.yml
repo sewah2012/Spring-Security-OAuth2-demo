@@ -1,0 +1,35 @@
+server:
+  port: 8000
+
+logging:
+  level:
+    org.springframework.security: trace
+spring:
+  application:
+    name: authz-service
+  security:
+    oauth2:
+      authorization-server:
+        client:
+          oidc-client:
+            registration:
+              client-id: "oidc-client"
+              client-secret: "{noop}secret"
+              client-authentication-methods:
+                - "client_secret_basic"
+              authorization-grant-types:
+                - "authorization_code"
+                - "client_credentials"
+                - "refresh"
+              redirect-uris:
+#                - "http://127.0.0.1:8181/login/oauth2/code/oidc-client/"
+                - "https://start.spring.io/login/oauth2/code/oidc-client/"
+              post-logout-redirect-uris:
+                - "http://127.0.0.1:8000/"
+              scopes:
+                - "openid"
+                - "profile"
+                - "refresh_token"
+#            require-authorization-consent: true
+
+
